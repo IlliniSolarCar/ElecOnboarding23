@@ -86,6 +86,8 @@ int main() {
         bool overflow;
         uint32_t now = common.loopTime(&timing, &overflow);
 
+        uint32_t pot = (uint32_t) potentiometer.read_u16();
+
         //clear CAN Buffer
         while(!common.readCANMessage(msg)) {
         	//you should do something with the relevant CAN messages here
@@ -95,14 +97,25 @@ int main() {
         	common.toggleReceiveCANLED();
         }
 
-        if(timing.tickThreshold(last_task_1_time, TASK_1_RATE_US)){
+        //task 1
+        if(timing.tickThreshold(last_task_1_time, pot)){
         	//PROJECT 1 - add code here to actually make the LED blink
+        	led5.write(!led5.read());
         }
 
         //PROJECT 2 - use the potentiometer to change the blink rate
+
+
 
 
 	}
 
 	shutdown_method();
 }
+
+
+
+
+
+
+
